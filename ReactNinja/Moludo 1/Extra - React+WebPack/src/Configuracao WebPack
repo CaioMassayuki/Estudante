@@ -1,0 +1,29 @@
+1.Criar package.json com um Objeto Vazio - aonde fica as dependencias
+
+2.Instalar WebPack como diretório de dependencias
+npm install --save-dev webpack@1
+
+3.Criar arquivo webpack.config.js
+
+4.Configurar o webpack para ler e gerar o bundle
+------------------------------------------------
+'use strict'
+
+const path = require('path')
+
+module.exports = {
+    entry: path.join(__dirname, 'src', 'index'),
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'bundle.js'
+    }
+}
+-----------------------------------------------
+
+5.Criar arquivo src/index.html
+
+6.Gerar o bundle
+npm install -g webpack@1 (Necessaria a instalação global)
+
+7.Criar index.html e adicionar o bundle
+
