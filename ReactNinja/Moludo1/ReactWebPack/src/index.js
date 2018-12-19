@@ -8,7 +8,7 @@ import App from './app';
 const renderApp = (NextApp) => {
     render(
         <AppContainer>
-            <NextApp />
+        <NextApp/>
         </AppContainer>,
         document.querySelector('[data-js="app"]')
     )
