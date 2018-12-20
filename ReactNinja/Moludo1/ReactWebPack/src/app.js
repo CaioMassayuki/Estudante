@@ -6,8 +6,10 @@ import Title from './title'
 const App = React.createClass({
     render: function () {
         return (
-            <div>
+            <div className='container'>
                 <Title name='Caio Massayuki' />
+                <label htmlFor='input'>Input</label>
+                <input type='text' id='input'></input>
             </div>
         )
     } 
