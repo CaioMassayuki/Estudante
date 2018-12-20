@@ -7,7 +7,7 @@ const App = React.createClass({
     render: function () {
         return (
             <div>
-                <Title name='Caio' lastname={15+10}/>
+                <Title lastname={15+10}/>
             </div>
         )
     } 
