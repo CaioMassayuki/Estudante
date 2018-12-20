@@ -6,7 +6,7 @@ const Title = React.createClass({
     getDefaultProps: function () {
         return{
             name: 'Desconhecido',
-            lastname: 'Sem Sobrenome'
+            lastname: 5
         }
     },
     render: function () {
