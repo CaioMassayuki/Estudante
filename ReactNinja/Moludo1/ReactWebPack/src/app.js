@@ -7,10 +7,10 @@ class App extends Component {
     //this.props
     render() {
         return (
-            <div>
-                {['blue', 'red', 'green'].map((square, index) => (
-                    <Square key={index} color={square} />
-                ))}
+            <div className='container' onClick={(e) => {
+                alert('clicou')
+            }}>
+                <Square />
             </div>
         )
     }
