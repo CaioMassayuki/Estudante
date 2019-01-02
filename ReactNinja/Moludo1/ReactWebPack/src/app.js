@@ -8,8 +8,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                {['blue', 'red', 'green'].map((square) => (
-                    <Square key={square} color={square} />
+                {['blue', 'red', 'green'].map((square, index) => (
+                    <Square key={index} color={square} />
                 ))}
             </div>
         )
