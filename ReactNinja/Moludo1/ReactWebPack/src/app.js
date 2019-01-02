@@ -1,14 +1,16 @@
 'use strict'
 
 import React, { Component } from 'react'
-import Title from './title'
+import Square from './square'
 
 class App extends Component {
     //this.props
     render() {
         return (
             <div>
-                <Title lastname={15 + 10} />
+                {['blue', 'red', 'green'].map((square) => (
+                    <Square key={square} color={square} />
+                ))}
             </div>
         )
     }
