@@ -1,32 +1,25 @@
 'use strict'
 
 import React, { Component } from 'react'
-import Button from './button'
-import LikeButton from './like-button'
-import SearchButton from './search-button'
 
 class App extends Component {
-    //this.props
+    constructor () {
+        super()
+        this.state = {
+            text: 'Caio'
+        }
+    }
     render() {
         return (
-            <div className='container'>
-                <LikeButton />
-                <SearchButton />
+            <div className='container' onClick={() => this.setState({
+                text: 'AAAAAAAAAA'
+            })}>
+                {this.state.text}
             </div>
         )
     }
 }
 
 App.defaultProps
-
-// const App = React.createClass({
-//     render: function () {
-//         return (
-//             <div>
-//                 <Title lastname={15+10}/>
-//             </div>
-//         )
-//     } 
-// })
 
 export default App
