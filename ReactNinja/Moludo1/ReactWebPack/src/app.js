@@ -6,17 +6,23 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-
+            checked: false,
+            showContent: false
         }
     }
     render() {
         return (
-            <form>
-                {/* Controlled TextArea Component */}
-                <textarea value='aaaaaaa'></textarea>
-                {/* Uncontrolled TextArea Component */}
-                <textarea defaultValue='textArea value'/>
-            </form>
+            <div>
+                <label>
+                    <input type='checkbox' checked={this.state.checked} onChange={(e) => {
+                        this.setState({ checked: !this.state.checked }, () => {
+                            this.setState({ showContent: this.state.checked })
+                        })
+                    }} />
+                    Mostrar conteúdo
+                </label>
+                {this.state.showContent && <div>Olha eu aqui!</div>}
+            </div>
         )
     }
 }
