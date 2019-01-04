@@ -3,65 +3,35 @@
 import React, { Component } from 'react'
 
 class App extends Component {
-    constructor () {
+    constructor() {
         super()
         this.state = {
-            value: 'Controlled Component',
-            checked: false,
-            radioCheck: false
+            value: '2'
         }
     }
     render() {
         return (
-            <div>
-                <form>
-                    {/* Controlled TextBox Component */}
-                    <input type='text' value={this.state.value} onChange={(e) => {
-                        this.setState({
-                            value: e.target.value
-                        })
-                    }}/>
-                    <label>
-                        {/* Controlled CheckBox Component */}
-                        <input type='checkbox' checked={this.state.checked} onChange={(e) => {
-                            this.setState({
-                                checked: e.target.checked
-                            })
-                        }} />
-                        Controlled Component
-                    </label>
-                    <label>
-                        {/* Controlled Radio Component */}
-                        <input type='radio' name='r' value={1} checked={this.state.radioCheck} onChange={(e) => {
-                            this.setState({
-                                radioCheck: e.target.radioCheck
-                            })
-                        }} />
-                        Controlled Component
-                    </label>
-                    <label>
-                        {/* Controlled Radio Component */}
-                        <input type='radio' name='r' value={2} checked={this.state.radioCheck} onChange={(e) => {
-                            this.setState({
-                                radioCheck: e.target.radioCheck
-                            })
-                        }} />
-                        Controlled Component
-                    </label>
-                    <br />
+            <form>
+                {/* Controlled Select Component */}
+                <select value={this.state.value} onChange={(e) => {
+                    this.setState({
+                        value: e.target.value
+                    })
+                }}>
+                    <option value='1'>Opção 1</option>
+                    <option value='2'>Opção 2</option>
+                    <option value='3'>Opção 3</option>
+                </select>
 
-                    {/* Uncontrolled TextBox Component */}
-                    <input type='text' defaultValue='Uncontrolled Component' />
-                    <label>
-                        {/* Uncontrolled CheckBox Component */}
-                        <input type='checkbox' defaultChecked={true} />
-                        Uncontrolled Component
-                    </label>
-                    {/* Uncontrolled Radio Component */}
-                    <input type='radio' name='d' value={1} defaultChecked /> Uncontrolled Component
-                    <input type='radio' name='d' value={2}  />Uncontrolled Component
-                </form>
-            </div>
+                <br />
+
+                {/* Uncontrolled Select Component */}
+                <select>
+                    <option value='1'>Opção 1</option>
+                    <option value='2' selected>Opção 2</option>
+                    <option value='3'>Opção 3</option>
+                </select>
+            </form>
         )
     }
 }
