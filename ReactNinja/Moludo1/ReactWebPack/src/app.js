@@ -9,7 +9,8 @@ class App extends Component {
         super()
         this.state = {
             showTimer: true,
-            color: 'green'
+            color: 'green',
+            time: 0
         }
     }
 
@@ -25,10 +26,10 @@ class App extends Component {
         console.log('render')
         return (
             <div>
-                {this.state.showTimer && <Timer />}
+                <Timer time={this.state.time}/>
                 <button onClick={() => {
-                    this.setState({ showTimer: !this.state.showTimer})
-                }}>Show / Hide Timer</button>
+                    this.setState({ time: this.state.time + 10 })
+                }}>Change Props</button>
             </div>
         )
     }
