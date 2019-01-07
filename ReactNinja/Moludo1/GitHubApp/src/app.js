@@ -1,41 +1,42 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
 
-class App extends Component {
-    constructor() {
-        super()
-        this.state = {
-            value: '2'
-        }
-    }
-    render() {
-        return (
-            <form>
-                {/* Controlled Select Component */}
-                <select value={this.state.value} onChange={(e) => {
-                    this.setState({
-                        value: e.target.value
-                    })
-                }}>
-                    <option value='1'>Opção 1</option>
-                    <option value='2'>Opção 2</option>
-                    <option value='3'>Opção 3</option>
-                </select>
+const App = () => (
+    <div className='app'>
+        <div className='search'>
+            <input type='search' placeholder='Digite o nome do Usuario do Github'/>
+        </div>
+        <div className='user-info'>
+            <img src='https://avatars2.githubusercontent.com/u/32188335?s=460&v=4'></img>
+            <h1>Caio Massayuki
+                <a href='https://github.com/CaioMassayuki'></a>
+            </h1>
+            <ul className='repos-info'>
+                <li>- Repositórios: 6</li>
+                <li>- Seguidores: 4</li>
+                <li>- Seguindo: 0</li>
+            </ul>
+            <div className='actions'>
+                <button> Ver Repositórios </button>
+                <button> Ver Favoritos </button>
+            </div>
 
-                <br />
+            <div className='repos'>
+                <h2> Repositórios: </h2>
+                <ul>
+                    <li><a href='#'>Nome do Repositório</a></li>
+                </ul>
+            </div>
 
-                {/* Uncontrolled Select Component */}
-                <select>
-                    <option value='1'>Opção 1</option>
-                    <option value='2' selected>Opção 2</option>
-                    <option value='3'>Opção 3</option>
-                </select>
-            </form>
-        )
-    }
-}
-
-App.defaultProps
+            <div className='starred'>
+            <h2> Favoritos: </h2>
+                <ul>
+                    <li><a href='#'>Nome do Repositório</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+)
 
 export default App
