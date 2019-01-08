@@ -10,8 +10,15 @@ class App extends Component {
         this.state = {
             userInfo: null,
             repos: [],
-            starred: []
+            starred: [],
+            isFetching: false
         }
+    }
+
+    getGithubApiUrl (username, type){
+        const internalUser = username ? `/${username}` : ''
+        const internalType = type ? `/${type}` : ''
+        return `https://api.github.com/users${internalUser}${internalType}`
     }
 
     handleSearch(e) {
@@ -19,19 +26,36 @@ class App extends Component {
         const keyCode = e.which || e.keyCode
         const ENTER = 13
         if (keyCode === ENTER) {
-            ajax().get(`https://api.github.com/users/${value}`)
-            .then((result) => {
-                this.setState({
-                    userInfo: {
-                        username: result.name,
-                        photo: result.avatar_url,
-                        login: result.login,
-                        repos: result.public_repos,
-                        followers: result.followers,
-                        following: result.following
-                    }
+            this.setState({ isFetching: true })
+            ajax().get(this.getGithubApiUrl(value))
+                .then((result) => {
+                    this.setState({
+                        userInfo: {
+                            username: result.name,
+                            photo: result.avatar_url,
+                            login: result.login,
+                            repos: result.public_repos,
+                            followers: result.followers,
+                            following: result.following
+                        },
+                        repos: [],
+                        starred: []
+                    })
+                }).always(() => this.setState({ isFetching: false }))
+        }
+    }
+
+    getRepos(type) {
+        return (e) => {
+            ajax().get(this.getGithubApiUrl(this.state.userInfo.login, type))
+                .then((result) => {
+                    this.setState({
+                        [type]: result.map((repo) => ({
+                            name: repo.name,
+                            link: repo.html_url
+                        }))
+                    })
                 })
-            })
         }
     }
 
@@ -40,8 +64,11 @@ class App extends Component {
             userInfo={this.state.userInfo}
             repos={this.state.repos}
             starred={this.state.starred}
-            handleSearch={(e) => this.handleSearch(e)} 
-            />
+            isFetching={this.state.isFetching}
+            handleSearch={(e) => this.handleSearch(e)}
+            getRepos={this.getRepos('repos')}
+            getStarred={this.getRepos('starred')}
+        />
     }
 }
 
