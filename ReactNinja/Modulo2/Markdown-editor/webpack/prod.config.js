@@ -33,7 +33,7 @@ module.exports = {
       chunks: ['main'],
       minChunks: ({ resource }) => (
         /node_modules\/(react(-dom)?|fbjs)\//.test(resource) ||
-        /node_modules\/preact/.test(resource)
+        /node_modules\/preact(-compat)?\//.test(resource)
       )
     }),
 
@@ -64,8 +64,6 @@ module.exports = {
   ),
 
   module: {
-    noParse: common.module.noParse,
-
     rules: [
       common.standardPreLoader,
       common.jsLoader,
@@ -79,6 +77,8 @@ module.exports = {
       })
     ]
   },
+
+  // resolve: common.resolve
 
   resolve: {
     alias: Object.assign({}, common.resolve.alias, {

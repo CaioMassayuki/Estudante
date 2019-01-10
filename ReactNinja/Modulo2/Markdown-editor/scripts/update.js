@@ -15,9 +15,6 @@ const addDev = (args) => {
 }
 
 add(dependencies).on('close', () => {
-  addDev(devDependencies.concat(
-    'react-hot-loader@3.0.0-beta.6',
-    'extract-text-webpack-plugin@beta'
-  ))
-  .on('close', (code) => process.exit(code))
+  addDev(devDependencies.concat('react-hot-loader@next'))
+    .on('close', (code) => process.exit(code))
 })
