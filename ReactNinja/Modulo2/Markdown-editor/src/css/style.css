@@ -1,5 +1,8 @@
 @charset 'utf-8';
 
+@import '~normalize.css';
+@import '~highlight.js/styles/dracula.css';
+
 * {
   box-sizing: border-box;
 }
@@ -18,49 +21,50 @@ body {
 
 .editor {
   display: flex;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
 }
 
-form {
+.editor-header {
+  background: #222;
   display: flex;
-  flex-direction: column;
+  height: 40px;
+  justify-content: flex-end;
+  width: 100%;
 }
 
-form,
+.editor-header .save-message {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  font-weight: 15px sans-serif;
+  margin: 0;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+textarea,
 .view {
+  height: calc(100% - 40px);
   min-width: 50%;
   max-width: 50%;
 }
 
 textarea {
-  border: 8px solid #fc0;
   font-size: 18px;
   padding: 10px;
   resize: none;
-  width: 100%;
-  height: 100vh;
 }
 
 textarea:focus {
   outline: 0 none;
 }
 
-button {
-  background: linear-gradient(#ff0, #fa0);
-  border: 3px solid #fd0;
-  color: #333;
-  font-size: 20px;
-  font-weight: 700;
-  height: 15%;
-  margin: 0;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in-out;
-  width: 100%;
-}
-
 .view {
   background: #333;
   color: #fff;
+  font-family: sans-serif;
   padding: 10px;
+  overflow: auto;
 }
