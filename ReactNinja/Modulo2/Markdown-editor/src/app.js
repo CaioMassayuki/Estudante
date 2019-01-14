@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import marked from 'marked'
 import MarkdownEditor from './components/markdown-editor'
+import { v4 } from 'node-uuid'
 
 import 'normalize.css'
 import 'highlight.js/styles/dracula.css'
@@ -22,40 +23,51 @@ import('highlight.js').then((hljs) => {
 class App extends Component {
   constructor () {
     super()
+
+    this.clearState = () => ({
+       value: '',
+       id: v4()
+    })
+
     this.state = {
-      value: '',
+      ...this.clearState(),
       isSaving: null
     }
+
     this.handleChange = (e) => {
       this.setState({
         value: e.target.value,
         isSaving: true
       })
     }
+
     this.getMarkup = () => {
       return { __html: marked(this.state.value) }
     }
+
     this.handleSave = () => {
       if (this.state.isSaving) {
-        localStorage.setItem('md', this.state.value)
+        localStorage.setItem(this.state.id, this.state.value)
         this.setState({
           isSaving: false
         })
       }
     }
+
+    this.createNew = () => {
+      this.setState(this.clearState())
+      this.textarea.focus()
+    }
+
     this.handleRemove = () => {
-      localStorage.removeItem('md')
-      this.setState({
-        value: ''
-      })
-      this.textarea.focus()
+      localStorage.removeItem(this.state.id)
+      this.createNew()
     }
+    
     this.handleCreate = () => {
-      this.setState({
-        value: ''
-      })
-      this.textarea.focus()
+      this.createNew()
     }
+
     this.textareaRef = (node) => {
       this.textarea = node
     }
