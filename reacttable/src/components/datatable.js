@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import ClearIcon from '@material-ui/icons/Clear'
 import DoneIcon from '@material-ui/icons/Done'
 
-const dataRow = (data, editingId, handleEdit, handleDelete, handleCancel, handleDone) => {
+const dataRow = (data, editingId, handleEdit, handleDelete, handleCancel, handleDone, handleChange) => {
     return (
         <TableBody>
             {data.map((row, index) => {
@@ -15,11 +15,11 @@ const dataRow = (data, editingId, handleEdit, handleDelete, handleCancel, handle
                     currentEditingRow ?
                         (
                             <TableRow key={index} selectable='false'>
-                                <TableCell><TextField name='name' defaultValue={row.nome}></TextField></TableCell>
-                                <TableCell><TextField name='sobrenome' defaultValue={row.sobrenome}></TextField></TableCell>
-                                <TableCell><TextField name='idade' defaultValue={row.idade}></TextField></TableCell>
+                                <TableCell><TextField value={row.nome} onChange={e => handleChange(e, 'nome', index)}></TextField></TableCell>
+                                <TableCell><TextField value={row.sobrenome} onChange={e => handleChange(e, 'sobrenome', index)}></TextField></TableCell>
+                                <TableCell><TextField value={row.idade} onChange={e => handleChange(e, 'idade', index)}></TextField></TableCell>
                                 <TableCell><DoneIcon onClick={() => handleDone(index, row)} /></TableCell>
-                                <TableCell><ClearIcon onClick={() => handleCancel()} /></TableCell>
+                                <TableCell><ClearIcon onClick={() => handleCancel(index)} /></TableCell>
                             </TableRow>
                         ) :
                         (
@@ -37,7 +37,7 @@ const dataRow = (data, editingId, handleEdit, handleDelete, handleCancel, handle
     )
 }
 
-const DataTable = ({ data, editingId, handleEdit, handleDelete, handleCancel, handleDone }) => (
+const DataTable = ({ data, editingId, handleEdit, handleDelete, handleCancel, handleDone, handleChange }) => (
     <Paper>
         <Table>
             <TableHead>
@@ -47,7 +47,7 @@ const DataTable = ({ data, editingId, handleEdit, handleDelete, handleCancel, ha
                     <TableCell>Idade</TableCell>
                 </TableRow>
             </TableHead>
-            {dataRow(data, editingId, handleEdit, handleDelete, handleCancel, handleDone)}
+            {dataRow(data, editingId, handleEdit, handleDelete, handleCancel, handleDone, handleChange)}
         </Table>
     </Paper>
 )

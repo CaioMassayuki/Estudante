@@ -8,16 +8,17 @@ class App extends Component {
     super()
     this.state = {
       data: [],
-      nome: '',
-      sobrenome: '',
-      idade: '',
+      holdRow: {},
       editingId: -1,
 
     }
 
-    this.handleChange = dataItem => event =>{
+    this.handleChange = (e, name, line) => {
+      const { value } = e.target;
       this.setState({
-        [dataItem]: event.target.value
+        data: this.state.data.map(
+          (row, index) => (index === line ? { ...row, [name]: value } : row)
+        )
       })
     }
 
@@ -28,29 +29,29 @@ class App extends Component {
       })
     }
 
-    this.handleEdit = index => {
-      console.log(index)
+    this.handleEdit = line => {
       this.setState({
-        editingId: index
+        editingId: line,
+        holdRow: this.state.data[line]
       })
     }
 
-    this.handleCancel = () => {
+    this.handleCancel = line => {
       this.setState({
+        data: this.state.data.fill(this.state.holdRow, line, line+1),
         editingId: -1
       })
     }
 
-    this.handleDelete = rowIndex => {
+    this.handleDelete = line => {
       this.setState({
-        data: this.state.data.filter((row, index) => index !== rowIndex)
+        data: this.state.data.filter((row, index) => index !== line)
       })
     }
 
-    this.handleDone = (index, row) => {
-      
+    this.handleDone = () => {
       this.setState({
-        data: this.state.data.map((row, i) => ( i === index ? { ...row,  } : row))
+        editingId: -1
       })
     }
   }
@@ -64,7 +65,8 @@ class App extends Component {
           handleEdit={this.handleEdit}
           handleDelete={this.handleDelete}
           handleCancel={this.handleCancel}
-          handleDone={this.handleDone} />
+          handleDone={this.handleDone}
+          handleChange={this.handleChange} />
         <DataButton handleAddData={this.handleAddData} />
       </div>
     )
