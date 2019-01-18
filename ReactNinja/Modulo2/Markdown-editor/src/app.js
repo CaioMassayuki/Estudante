@@ -1,12 +1,10 @@
 'use strict'
 
 import React, { Component } from 'react'
-import marked from 'marked'
-import MarkdownEditor from './components/markdown-editor'
 import { v4 } from 'node-uuid'
+import marked from 'marked'
+import MarkdownEditor from 'views/markdown-editor'
 
-import 'normalize.css'
-import 'highlight.js/styles/dracula.css'
 import './css/style.css'
 
 import('highlight.js').then((hljs) => {
@@ -25,13 +23,14 @@ class App extends Component {
     super()
 
     this.clearState = () => ({
-       value: '',
-       id: v4()
+      value: '',
+      id: v4()
     })
 
     this.state = {
       ...this.clearState(),
-      isSaving: null
+      isSaving: null,
+      files: {}
     }
 
     this.handleChange = (e) => {
@@ -45,12 +44,10 @@ class App extends Component {
       return { __html: marked(this.state.value) }
     }
 
-    this.handleSave = () => {
+    this.handleSave = (value) => {
       if (this.state.isSaving) {
         localStorage.setItem(this.state.id, this.state.value)
-        this.setState({
-          isSaving: false
-        })
+        this.setState({ isSaving: false })
       }
     }
 
@@ -63,7 +60,7 @@ class App extends Component {
       localStorage.removeItem(this.state.id)
       this.createNew()
     }
-    
+
     this.handleCreate = () => {
       this.createNew()
     }
@@ -71,16 +68,28 @@ class App extends Component {
     this.textareaRef = (node) => {
       this.textarea = node
     }
+
+    this.handleOpenFile = (fileId) => () => {
+      this.setState({
+        value: this.state.files[fileId],
+        id: fileId
+      })
+    }
   }
 
   componentDidMount () {
-    const value = localStorage.getItem('md')
-    this.setState({ value: value || '' })
+    const files = Object.keys(localStorage)
+    this.setState({
+      files: files.reduce((acc, fileId) => ({
+        ...acc,
+        [fileId]: localStorage.getItem(fileId)
+      }), {})
+    })
   }
 
   componentDidUpdate () {
     clearInterval(this.timer)
-    this.timer = setTimeout(this.handleSave, 1000)
+    this.timer = setTimeout(this.handleSave, 300)
   }
 
   componentWillUnmount () {
@@ -91,13 +100,14 @@ class App extends Component {
     return (
       <MarkdownEditor
         value={this.state.value}
-        handleChange={this.handleChange}
-        getMarkup={this.getMarkup}
-        handleSave={this.handleSave}
         isSaving={this.state.isSaving}
+        handleChange={this.handleChange}
         handleRemove={this.handleRemove}
         handleCreate={this.handleCreate}
+        getMarkup={this.getMarkup}
         textareaRef={this.textareaRef}
+        files={this.state.files}
+        handleOpenFile={this.handleOpenFile}
       />
     )
   }

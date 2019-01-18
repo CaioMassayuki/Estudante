@@ -17,11 +17,11 @@ module.exports = {
   ],
 
   output: Object.assign({}, common.output, {
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: ''
   }),
 
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
 
@@ -30,6 +30,7 @@ module.exports = {
 
   module: {
     noParse: common.module.noParse,
+
     rules: [
       common.standardPreLoader,
       common.jsLoader,

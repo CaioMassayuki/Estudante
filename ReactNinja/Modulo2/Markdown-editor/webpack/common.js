@@ -19,8 +19,7 @@ module.exports = {
 
   output: {
     path: paths.dist,
-    filename: '[name]-[chunkhash].js',
-    publicPath: '/'
+    filename: '[name]-[chunkhash].js'
   },
 
   htmlPluginConfig: {
@@ -43,19 +42,7 @@ module.exports = {
   jsLoader: {
     test: /\.js$/,
     include: paths.src,
-    use: ['react-hot-loader/webpack', {
-      loader: 'babel-loader',
-      options: {
-        presets: [['env', { modules: false }], 'stage-0', 'react'],
-        plugins: [
-          ['transform-runtime', {
-            helpers: false,
-            polyfill: false,
-            regenerator: true
-          }]
-        ]
-      }
-    }]
+    use: 'babel-loader'
   },
 
   cssLoader: {
@@ -69,7 +56,7 @@ module.exports = {
     include: paths.src,
     use: {
       loader: 'file-loader',
-      options: {
+      query: {
         name: 'media/[name].[hash:8].[ext]'
       }
     }
@@ -80,7 +67,7 @@ module.exports = {
     include: paths.src,
     use: {
       loader: 'url-loader',
-      options: {
+      query: {
         limit: 10000,
         name: 'media/[name].[hash:8].[ext]'
       }
@@ -95,7 +82,8 @@ module.exports = {
     alias: {
       src: paths.src,
       components: join(paths.src, 'components'),
-      utils: join(paths.src, 'utils')
+      utils: join(paths.src, 'utils'),
+      views: join(paths.src, 'views')
     }
   }
 }
