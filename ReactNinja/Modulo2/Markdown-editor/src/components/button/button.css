@@ -6,21 +6,20 @@
     text-transform: uppercase;
     transition: all 0.25s ease-in-out;
   }
-  
+
   .button.-danger {
     background: red;
   }
-  
+
   .button.-danger:hover {
     background: darkred;
   }
-  
+
   .button.-success {
     background: green;
   }
-  
+
   .button.-success:hover {
     background: darkgreen;
   }
-  
-  
+
