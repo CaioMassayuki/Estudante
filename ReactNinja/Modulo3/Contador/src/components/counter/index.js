@@ -1,11 +1,37 @@
 'use strict'
 
-const Counter = () => (
-  <div>
-    <h1>0</h1>
-    <button>-</button>
-    <button>+</button>
-  </div>
-)
+import React, { PureComponent } from 'react'
+import Counter from './counter'
 
-export default Counter
+class CounterContainer extends PureComponent {
+  constructor () {
+    super()
+    this.state = {
+      counter: 0
+    }
+
+    this.increment = () => {
+      this.setState({
+        counter: this.state.counter + 1
+      })
+    }
+
+    this.decrement = () => {
+      this.setState({
+        counter: this.state.counter - 1
+      })
+    }
+  }
+  render () {
+    const { counter } = this.state
+
+    return (
+      <Counter
+        counter={counter}
+        decrement={this.decrement}
+        increment={this.increment} />
+    )
+  }
+}
+
+export default CounterContainer
