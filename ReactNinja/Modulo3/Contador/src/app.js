@@ -1,10 +1,10 @@
 'use strict'
 
 import React from 'react'
-import Counter from 'components/Counter'
+import Counters from 'components/counters'
 
 const App = () => (
-  <Counter />
+  <Counters />
 )
 
 export default App
