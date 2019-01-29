@@ -1,6 +1,6 @@
 'use strict'
 
-import { ADD_TODO, TOGGLE_TODO } from "./actions";
+import { ADD_TODO, TOGGLE_TODO } from './actions'
 
 export const initialState = []
 
@@ -25,6 +25,5 @@ const todos = (state = initialState, action) => {
   }
   return state
 }
-
 
 export default todos
