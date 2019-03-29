@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Textbox from '../components/textbox'
-import Textview from '../components/textview'
+import MarkdownView from '../components/markdown-view'
 import marked from 'marked'
 
 const styles = {
@@ -43,16 +43,23 @@ const styles = {
 
 const MarkdownEditor = () => {
   const [textValue, setTextValue] = useState('')
+  const [markdownHtml, setMarkdownHtml] = useState('')
 
   const handleTextValueChange = event => {
     setTextValue(event.target.value)
+    markdownTransformation(event.target.value)
+  }
+
+  const markdownTransformation = text => {
+    setMarkdownHtml(marked(text))
   }
 
   return (
     <div style={styles.markdowneditor.Wrapper}>
-      {console.log(marked(textValue))}
       <Textbox style={styles.textbox} handleTextValueChange={handleTextValueChange} />
-      <Textview style={styles.textview} textValue={textValue} />
+      <MarkdownView innerHTML={true}>
+        {markdownHtml}
+      </MarkdownView>
     </div>
   )
 }
