@@ -1,13 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react'
-import hljs from 'highlight.js/lib/languages/javascript'
+import hljs from 'highlight.js/lib/highlight'
 
-const MarkdownView = ({ children, className, innerHTML, element }) => {
+const AVAILABLE_LANGUAGES = ['javascript', 'java', 'css', 'html', 'c#', 'python']
+
+const MarkdownView = ({ children, className, innerHTML }) => {
   const elementRef = useRef()
+  const [languages, setLanguages] = useState([])
 
+  const validateLanguage = language => {
+    return AVAILABLE_LANGUAGES.find(validLang => validLang === language)
+  }
+
+  const validateLanguageExistence = language => {
+    return !languages.find(validLang => validLang === language)
+  }
+  
   useEffect(() => {
     const nodes = elementRef.current.querySelectorAll('pre code')
-    console.log(elementRef)
-    console.log(innerHTML)
+    const newLanguages = languages
+
+    nodes.forEach(node => {
+      const nodeLang = node.className.replace(/^language-/gmi, '')
+      if (validateLanguage(nodeLang) && validateLanguageExistence(nodeLang)) {
+        newLanguages.push(nodeLang)
+        setLanguages(newLanguages)
+        hljs.registerLanguage(nodeLang, require(`highlight.js/lib/languages/${nodeLang}`))
+      }
+      // Arrumar esse Highlight Block
+      hljs.highlightBlock(node)
+    })
   })
 
   const props =
@@ -16,7 +37,7 @@ const MarkdownView = ({ children, className, innerHTML, element }) => {
       { className, ref: elementRef, children }
 
   return (
-    <div {...props} />
+    <div {...props}></div>
   )
 }
 
