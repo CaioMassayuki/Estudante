@@ -1,23 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
+import DataBlock from './DataBlock/datablock'
+import TextBlock from './TextBlock/textblock'
 
 const MarkdownEditor = () => {
-  const [textValue, setTextValue] = useState('')
   return (
-    <div>
-      <div
-        suppressContentEditableWarning
-        contentEditable
-        onFocus={e => console.log('focused')}
-        onBlur={e => console.log('blur')}
-        onKeyDown={e => {
-          if (e.keyCode === 13 || e.keyCode === 32) {
-            //Validade Text
-          }
-        }}
-        onInput={e => setTextValue(e.target.innerText)}
-        innertext={console.log(textValue)}
-      />
-    </div>
+    <DataBlock>
+      <TextBlock />
+    </DataBlock>
   )
 }
 
