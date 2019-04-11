@@ -1,9 +1,12 @@
 import React from 'react'
 
-const DataBlock = children => {
-  return(
-  <div>
-      {children.children === Array ? children.children.map(element => element) : children.children}
+const DataBlock = ({ handleEnterKeyDown, children }) => {
+  return (
+    <div
+      style={{ width: '100vw', height: '100vh' }}
+      onKeyDown={handleEnterKeyDown}
+    >
+      {children === Array ? children.map(element => element) : children}
     </div>
   )
 }
