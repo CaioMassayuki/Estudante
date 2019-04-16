@@ -7,7 +7,6 @@ requestConfig()
 const App = () => {
   return (
     <div>
-      <Button>GET</Button>
       <Button>POST</Button>
     </div>
   )

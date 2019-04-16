@@ -1,4 +1,3 @@
-import uuid from 'uuid/v4'
 import axios from 'axios'
 
 const HTTP_STATUS = {
@@ -11,6 +10,7 @@ export const request = ({
 }) => axios({
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': options.auth
   },
   ...options,
   url: `${url}`,
