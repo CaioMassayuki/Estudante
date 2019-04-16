@@ -1,7 +1,6 @@
 import { request } from '../config/http-requests'
 
 // POST - Request na Auth que retorna o Token
-<<<<<<< HEAD
 export const getAccessToken = async (username, password) => {
   return await request({
     url: `http://10.0.5.178:8762/auth`,
@@ -11,18 +10,6 @@ export const getAccessToken = async (username, password) => {
       password,
     },
   })
-=======
-export const handlePost = async (event, setHeader) => {
-  const response = await request({
-    url: `http://10.0.5.178:8762/auth`,
-    method: 'post',
-    data: {
-      username: 'admin',
-      password: 'admin',
-    },
-  })
-  setHeader(response.headers.authorization)
->>>>>>> 7563e51317d232ec1513c78dbc8541403ad5a871
 }
 
 // GET - Request na Kirby para retornar arvore de diretorios do usuario(token)
