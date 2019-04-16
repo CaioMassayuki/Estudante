@@ -1,13 +1,13 @@
 import React from 'react'
 import { requestConfig } from './config/http-requests'
-import Button from './components/Button'
+import RequestHub from './pages/RequestHub'
 
 requestConfig()
 
 const App = () => {
   return (
     <div>
-      <Button>POST</Button>
+      <RequestHub />
     </div>
   )
 }
