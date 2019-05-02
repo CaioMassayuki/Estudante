@@ -3,7 +3,7 @@ import Button from './request-button.style'
 
 const RequestButton = ({ children, handleRequestButtonClick }) => {
   return (
-    <Button onClick={handleRequestButtonClick}>{children}</Button>
+    <Button onClick={() => handleRequestButtonClick()}>{children}</Button>
   )
 }
 
