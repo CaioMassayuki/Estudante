@@ -6,9 +6,7 @@ const RequestInput = ({ placeholder, text, handleChangeInput }) => {
     <Input
       placeholder={placeholder}
       onChange={event => handleChangeInput(event.target.value)}
-    >
-      {text}
-    </Input>
+    />
   )
 }
 
